@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include bukhamseen *.css
+recursive-include bukhamseen *.csv
+recursive-include bukhamseen *.html
+recursive-include bukhamseen *.ico
+recursive-include bukhamseen *.js
+recursive-include bukhamseen *.json
+recursive-include bukhamseen *.md
+recursive-include bukhamseen *.png
+recursive-include bukhamseen *.py
+recursive-include bukhamseen *.svg
+recursive-include bukhamseen *.txt
+recursive-exclude bukhamseen *.pyc
