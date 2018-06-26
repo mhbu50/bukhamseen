@@ -7,4 +7,10 @@ import frappe
 from frappe.model.document import Document
 
 class Najahi(Document):
-	pass
+	def validate(self):
+		user = frappe.get_doc("User", self.member)
+		user.accepted_for_mawhipah = self.accepted_for_mawhipah
+
+
+
+		user.save()
