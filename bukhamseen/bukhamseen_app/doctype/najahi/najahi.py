@@ -10,7 +10,10 @@ class Najahi(Document):
 	def validate(self):
 		user = frappe.get_doc("User", self.member)
 		user.full_name = self.full_name
-		user.mobile_number = self.mobile_number
+		user.gender = self.gender
+		user.mobile_no = self.mobile_no
+		user.birth_date = self.birth_date
+		user.id_number = self.id_number
 		user.certificate_received_in = self.certificate_received_in
 		user.educational_grade = self.educational_grade
 		user.academic_qualifications = self.academic_qualifications
@@ -39,7 +42,7 @@ class Najahi(Document):
 		user.competition_participation_goals = self.competition_participation_goals
 		user.describe_your_journey2 = self.describe_your_journey2
 		user.competition_challenges = self.competition_challenges
-		user.any_scientific_literate_artistic_or_research_accomplishments = self.any_scientific_literate_artistic_or_research_accomplishments
+		user.any_accomplishments = self.any_accomplishments
 		user.accomplishment_title = self.accomplishment_title
 		user.accomplishments_prize_sponsor = self.accomplishments_prize_sponsor
 		user.accomplishments_participation_category = self.accomplishments_participation_category
