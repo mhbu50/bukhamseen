@@ -4,20 +4,20 @@
 frappe.ui.form.on('Najahi', {
 	latest_gpa_rate: function(frm){
 		
-		frm.set_value("latest_gpa_rate_12",(frm.doc.latest_gpa_rate + frm.doc.latest_gpa_rate_2)/ 2);
+		frm.set_value("latest_gpa_rate_12",(parseFloat(frm.doc.latest_gpa_rate) + parseFloat(frm.doc.latest_gpa_rate_2))/ 2);
 		console.log("frm.doc.latest_gpa_rate",frm.doc.latest_gpa_rate);
 		console.log("frm.doc.latest_gpa_rate_2",frm.doc.latest_gpa_rate_2);
-		console.log("total",(frm.doc.latest_gpa_rate + frm.doc.latest_gpa_rate_2)/ 2);
+		console.log("total",(parseFloat(frm.doc.latest_gpa_rate) + parseFloat(frm.doc.latest_gpa_rate_2))/ 2);
 		
 		frm.refresh_field("latest_gpa_rate_12");
 	},
 
 	latest_gpa_rate_2: function(frm){
 
-		frm.set_value("latest_gpa_rate_12",(frm.doc.latest_gpa_rate + frm.doc.latest_gpa_rate_2)/ 2);
+		frm.set_value("latest_gpa_rate_12",(parseFloat(frm.doc.latest_gpa_rate) + parseFloat(frm.doc.latest_gpa_rate_2))/ 2);
 		console.log("frm.doc.latest_gpa_rate",frm.doc.latest_gpa_rate);
 		console.log("frm.doc.latest_gpa_rate_2",frm.doc.latest_gpa_rate_2);
-		console.log("total",(frm.doc.latest_gpa_rate + frm.doc.latest_gpa_rate_2)/ 2);
+		console.log("total",(parseFloat(frm.doc.latest_gpa_rate) + parseFloat(frm.doc.latest_gpa_rate_2))/ 2);
 
 		frm.refresh_field("latest_gpa_rate_12");
 	}
@@ -75,9 +75,12 @@ frappe.ui.form.on('Najahi', {
 					frm.set_value("academic_qualifications",data.message.academic_qualifications);
 					frm.set_value("latest_certificate_percentage",data.message.latest_certificate_percentage);
 					frm.set_value("previous_certificate_percentage",data.message.previous_certificate_percentage);
-					frm.set_value("latest_gpa_rate",data.message.latest_gpa_rate);
-					frm.set_value("previous_gpa_rate",data.message.previous_gpa_rate);
 					frm.set_value("gpa_out_of",data.message.gpa_out_of);
+					frm.set_value("previous_gpa_rate",data.message.previous_gpa_rate);
+					frm.set_value("latest_gpa_rate",data.message.latest_gpa_rate);
+					frm.set_value("latest_gpa_rate_2",data.message.latest_gpa_rate_2);
+					frm.set_value("latest_gpa_rate_12",data.message.latest_gpa_rate_12);
+					frm.set_value("latest_gpa",data.message.latest_gpa);
 					frm.set_value("education_status",data.message.education_status);
 					frm.set_value("graduated_from",data.message.graduated_from);
 					frm.set_value("accepted_for_mawhipah",data.message.accepted_for_mawhipah);
@@ -123,6 +126,9 @@ frappe.ui.form.on('Najahi', {
 					frm.refresh_field("latest_gpa_rate");
 					frm.refresh_field("previous_gpa_rate");
 					frm.refresh_field("gpa_out_of");
+					frm.refresh_field("latest_gpa_rate_2");
+					frm.refresh_field("latest_gpa_rate_12");
+					frm.refresh_field("latest_gpa");
 					frm.refresh_field("education_status");
 					frm.refresh_field("graduated_from");
 					frm.refresh_field("accepted_for_mawhipah");
@@ -181,7 +187,10 @@ frappe.ui.form.on('Payment Form', {
 		var row = locals[cdt][cdn];
 		frappe.model.set_value(row.doctype, row.name, 'najahi_year', frm.doc.najahi_year);
 		frappe.model.set_value(row.doctype, row.name, 'najahi_subscription', frm.doc.name);
-		frappe.model.set_value(row.doctype, row.name, 'subscribed_member', frm.doc.member);
+		frappe.model.set_value(row.doctype, row.name, 'subscribed_member', frm.doc.member);		
+		frappe.model.set_value(row.doctype, row.name, 'full_name', frm.doc.full_name);
+		frappe.model.set_value(row.doctype, row.name, 'mobile_no', frm.doc.mobile_no);
+		frappe.model.set_value(row.doctype, row.name, 'id_number', frm.doc.id_number);
 	}
 })
 
