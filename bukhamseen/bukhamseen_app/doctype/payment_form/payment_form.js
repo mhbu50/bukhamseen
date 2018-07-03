@@ -1,8 +1,25 @@
-// Copyright (c) 2018, Accurate systems and contributors
-// For license information, please see license.txt
 
 frappe.ui.form.on('Payment Form', {
-	refresh: function(frm) {
+	sponser:function(frm){
+		frappe.call({
+			"method": "frappe.client.get",
+			args: {
+				doctype: "User",
+				name: frm.doc.sponser
+			},
+			callback: function(data) {
+				if (data.message) {					
+					frappe.set_value( 'city', data.message.city);
+				}
+			}
+		});	
+	}
+})
 
+cur_frm.set_query("cash_recipient", function(frm) {
+	return{
+		filters: [
+			['city', '=',frm.doc.city]
+		]
 	}
 });

@@ -2,14 +2,51 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Najahi', {
-	latest_gpa_rate_2: function(frm){
-
-		frm.set_value("latest_gpa_rate_12",frm.doc.latest_gpa_rate + frm.doc.latest_gpa_rate_2);
+	latest_gpa_rate: function(frm){
+		
+		frm.set_value("latest_gpa_rate_12",(frm.doc.latest_gpa_rate + frm.doc.latest_gpa_rate_2)/ 2);
 		console.log("frm.doc.latest_gpa_rate",frm.doc.latest_gpa_rate);
 		console.log("frm.doc.latest_gpa_rate_2",frm.doc.latest_gpa_rate_2);
-		console.log("total",frm.doc.latest_gpa_rate + frm.doc.latest_gpa_rate_2);
+		console.log("total",(frm.doc.latest_gpa_rate + frm.doc.latest_gpa_rate_2)/ 2);
+		
+		frm.refresh_field("latest_gpa_rate_12");
+	},
+
+	latest_gpa_rate_2: function(frm){
+
+		frm.set_value("latest_gpa_rate_12",(frm.doc.latest_gpa_rate + frm.doc.latest_gpa_rate_2)/ 2);
+		console.log("frm.doc.latest_gpa_rate",frm.doc.latest_gpa_rate);
+		console.log("frm.doc.latest_gpa_rate_2",frm.doc.latest_gpa_rate_2);
+		console.log("total",(frm.doc.latest_gpa_rate + frm.doc.latest_gpa_rate_2)/ 2);
 
 		frm.refresh_field("latest_gpa_rate_12");
+	}
+	,
+
+	latest_gpa_rate_12: function(frm){
+		if (frm.doc.gpa_out_of === "Out of 4") {
+
+		frm.set_value("latest_gpa",frm.doc.latest_gpa_rate_12 / 4 * 100);
+		console.log("frm.doc.latest_gpa_rate_12",frm.doc.latest_gpa_rate_12);
+		console.log("total",frm.doc.latest_gpa_rate_12 / 4 * 100);
+
+		frm.refresh_field("gpa_out_of");
+		frm.refresh_field("latest_gpa");
+		}
+		else {
+			frm.set_value("latest_gpa",frm.doc.latest_gpa_rate_12 / 5 * 100);
+			console.log("frm.doc.latest_gpa_rate_12",frm.doc.latest_gpa_rate_12);
+			console.log("total",frm.doc.latest_gpa_rate_12 / 5 * 100);
+	
+			frm.refresh_field("gpa_out_of");
+			frm.refresh_field("latest_gpa");
+		}
+	}
+	,
+
+	
+	gpa_out_of: function(frm){
+		frm.trigger("latest_gpa_rate_12")
 	}
 	,
 	onload: function(frm) {
@@ -119,5 +156,40 @@ frappe.ui.form.on('Najahi', {
 				}
 			}
 		});
+	}
+});
+
+
+
+frappe.ui.form.on('Payment Form', {
+	sponser:function(frm, cdt, cdn){
+		var row = locals[cdt][cdn];
+		frappe.call({
+			"method": "frappe.client.get",
+			args: {
+				doctype: "User",
+				name: row.sponser
+			},
+			callback: function(data) {
+				if (data.message) {					
+					frappe.model.set_value(row.doctype, row.name, 'city', data.message.city);
+				}
+			}
+		});	
+	},
+	payment_form_add: function(frm, cdt, cdn){
+		var row = locals[cdt][cdn];
+		frappe.model.set_value(row.doctype, row.name, 'najahi_year', frm.doc.najahi_year);
+		frappe.model.set_value(row.doctype, row.name, 'najahi_subscription', frm.doc.name);
+		frappe.model.set_value(row.doctype, row.name, 'subscribed_member', frm.doc.member);
+	}
+})
+
+cur_frm.set_query("cash_recipient", "payment_form", function(doc, cdt, cdn) {
+	var row = locals[cdt][cdn];
+	return{
+		filters: [
+			['city', '=',row.city]
+		]
 	}
 });
