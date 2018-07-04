@@ -59,14 +59,14 @@ frappe.ui.form.on('Payment Form', {
 			}
 		});
 	},
-	test:function(frm){
+	cash_recipient:function(frm){
 		console.log("frm.doc",frm.doc);
-		console.log("frm.doc.test",frm.doc.test);
+		console.log("frm.doc.cash_recipient",frm.doc.cash_recipient);
 		frappe.call({
 			"method": "frappe.client.get",
 			args: {
 				doctype: "Cash Recipient",
-				name: frm.doc.test
+				name: frm.doc.cash_recipient
 			},
 			callback: function(data) {
 				if (data.message) {
