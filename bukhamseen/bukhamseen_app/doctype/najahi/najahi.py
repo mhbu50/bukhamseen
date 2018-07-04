@@ -17,8 +17,8 @@ class Najahi(Document):
 		user.certificate_received_in = self.certificate_received_in
 		user.educational_grade = self.educational_grade
 		user.academic_qualifications = self.academic_qualifications
-		user.latest_certificate_percentage = self.latest_certificate_percentage
-		user.previous_certificate_percentage = self.previous_certificate_percentage
+		# user.latest_certificate_percentage = self.latest_certificate_percentage
+		user.previous_certificate_percentage = self.latest_certificate_percentage
 		# user.latest_gpa_rate = self.latest_gpa_rate
 		user.previous_gpa_rate = self.latest_gpa
 		user.gpa_out_of = self.gpa_out_of
